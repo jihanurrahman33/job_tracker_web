@@ -40,9 +40,9 @@ npm install
 ```
 
 ### 2. Configure Environment (Optional)
-The app defaults to the live Render deployment (`https://job-tracker-server-9drb.onrender.com`). You can customize this in `.env.local`:
+The app defaults to the live Vercel deployment (`https://job-tracker-server-nu.vercel.app`). You can customize this in `.env.local`:
 ```env
-NEXT_PUBLIC_DEFAULT_API_URL=https://job-tracker-server-9drb.onrender.com
+NEXT_PUBLIC_DEFAULT_API_URL=https://job-tracker-server-nu.vercel.app
 ```
 
 ### 3. Run Development Server

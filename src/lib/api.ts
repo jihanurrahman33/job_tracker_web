@@ -22,7 +22,7 @@ import {
 
 const TOKEN_STORAGE_KEY = 'job_tracker_token';
 const SERVER_URL_STORAGE_KEY = 'job_tracker_server_url';
-const DEFAULT_URL = process.env.NEXT_PUBLIC_DEFAULT_API_URL || 'https://job-tracker-server-9drb.onrender.com';
+const DEFAULT_URL = process.env.NEXT_PUBLIC_DEFAULT_API_URL || 'https://job-tracker-server-nu.vercel.app';
 
 export class ApiError extends Error {
   code: string;

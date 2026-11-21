@@ -35,10 +35,10 @@ export const ServerProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isChecking, setIsChecking] = useState<boolean>(false);
 
   useEffect(() => {
-    const saved = serverStorage.get();
-    if (saved) {
-      setServerUrlState(saved);
-    }
+    // The server address is no longer user-editable. Drop any override saved
+    // by the old settings screen so everyone uses the default.
+    serverStorage.reset();
+    setServerUrlState(serverStorage.get());
   }, []);
 
   const checkServerHealth = useCallback(

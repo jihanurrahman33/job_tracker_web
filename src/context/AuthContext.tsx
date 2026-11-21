@@ -25,7 +25,8 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const PUBLIC_PATHS = ["/login", "/register"];
+const PUBLIC_PATHS = ["/", "/login", "/register"];
+const AUTH_PATHS = ["/login", "/register"];
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -70,8 +71,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const isPublicPath = PUBLIC_PATHS.includes(pathname);
       if (!user && !isPublicPath) {
         router.push("/login");
-      } else if (user && isPublicPath) {
-        router.push("/");
+      } else if (user && AUTH_PATHS.includes(pathname)) {
+        router.push("/dashboard");
       }
     }
   }, [user, isLoading, pathname, router]);
@@ -84,7 +85,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setToken(res.token);
       setUser(res.user);
       success("Welcome back!", `Signed in as ${res.user.name}`);
-      router.push("/");
+      router.push("/dashboard");
       return true;
     } catch (err: any) {
       error("Sign in failed", err.message || "Please check your credentials.");
@@ -102,7 +103,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setToken(res.token);
       setUser(res.user);
       success("Account created!", `Welcome to Job Tracker, ${res.user.name}`);
-      router.push("/");
+      router.push("/dashboard");
       return true;
     } catch (err: any) {
       let detailMsg = err.message;

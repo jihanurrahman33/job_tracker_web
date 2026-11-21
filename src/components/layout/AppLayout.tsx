@@ -44,7 +44,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
   }
 
   return (
-    <div className="min-h-screen bg-slate-50/50 dark:bg-zinc-950 flex text-slate-900 dark:text-zinc-100">
+    <div className="min-h-screen bg-paper flex text-ink">
       {/* Sidebar */}
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 

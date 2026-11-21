@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const DEFAULT_SERVER_URL = process.env.NEXT_PUBLIC_DEFAULT_API_URL || 'https://job-tracker-server-9drb.onrender.com';
+const DEFAULT_SERVER_URL = process.env.NEXT_PUBLIC_DEFAULT_API_URL || 'https://job-tracker-server-nu.vercel.app';
 
 async function handler(req: NextRequest, { params }: { params: { path: string[] } }) {
   const path = params.path.join('/');

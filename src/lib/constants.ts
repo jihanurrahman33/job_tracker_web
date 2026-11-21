@@ -2,14 +2,14 @@ import { ApplicationStatus, InterviewType } from '@/types/api';
 
 export const SERVER_PRESETS = [
   {
-    name: 'Render Cloud (Default)',
-    url: 'https://job-tracker-server-9drb.onrender.com',
-    description: 'Render Hosted Live API Instance',
-  },
-  {
-    name: 'Vercel Serverless',
+    name: 'Vercel Serverless (Default)',
     url: 'https://job-tracker-server-nu.vercel.app',
     description: 'Vercel Edge/Serverless Deployment',
+  },
+  {
+    name: 'Render Cloud (Legacy)',
+    url: 'https://job-tracker-server-9drb.onrender.com',
+    description: 'Render Hosted API Instance (its database has expired)',
   },
   {
     name: 'Local Server (Docker / Go)',
@@ -86,6 +86,18 @@ export const STATUS_CONFIG: Record<
     border: 'border-slate-300 dark:border-zinc-700',
     dot: 'bg-slate-400',
   },
+};
+
+// One colour per stage, used by the dashboard's pipeline ruler.
+export const STAGE_COLOR: Record<ApplicationStatus, string> = {
+  APPLIED: '#8FAECB',
+  SCREENING: '#5E86AD',
+  INTERVIEW: '#2A4E75',
+  TECHNICAL_INTERVIEW: '#172F49',
+  OFFER: '#1E7A57',
+  ACCEPTED: '#14573F',
+  REJECTED: '#C8372D',
+  WITHDRAWN: '#A9B2BA',
 };
 
 export const INTERVIEW_TYPE_CONFIG: Record<
