@@ -92,7 +92,8 @@ export default function RegisterPage() {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 required
-                minLength={6}
+                minLength={8}
+                maxLength={128}
                 autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -107,7 +108,7 @@ export default function RegisterPage() {
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
-            <p className="mt-1.5 text-sm text-pencil">At least 6 characters.</p>
+            <p className="mt-1.5 text-sm text-pencil">At least 8 characters.</p>
           </div>
 
           <button

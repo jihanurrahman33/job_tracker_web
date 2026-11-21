@@ -22,7 +22,7 @@ export default function LoginPage() {
     setIsSubmitting(true);
     const ok = await login({ email, password });
     if (!ok) {
-      setLoginError('That email and password don’t match. Check them and try again, or create an account.');
+      setLoginError('We couldn’t sign you in. Check your email and password, or read the notice in the corner for the reason.');
     }
     setIsSubmitting(false);
   };

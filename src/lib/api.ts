@@ -1,4 +1,9 @@
 import {
+  ActivityQuery,
+  AdminOverview,
+  AdminReview,
+  AdminUser,
+  ActivityItem,
   ApiErrorResponse,
   Application,
   ApplicationEvent,
@@ -103,10 +108,6 @@ async function request<T>(endpoint: string, options: FetchOptions = {}): Promise
     'Content-Type': 'application/json',
     ...(options.headers as Record<string, string>),
   };
-
-  if (isBrowser) {
-    headers['x-backend-url'] = backendUrl;
-  }
 
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
@@ -308,6 +309,37 @@ export const api = {
 
   deleteMyReview: (): Promise<void> =>
     request<void>('/api/v1/reviews/me', { method: 'DELETE' }),
+
+  // Admin: every call is also checked on the server, so these only work for admins
+  adminOverview: (): Promise<AdminOverview> =>
+    request<AdminOverview>('/api/v1/admin/overview', { method: 'GET' }),
+
+  adminUsers: (params: { search?: string; page?: number; limit?: number }): Promise<PaginatedResponse<AdminUser>> =>
+    request<PaginatedResponse<AdminUser>>('/api/v1/admin/users', {
+      method: 'GET',
+      params: params as Record<string, string | number | boolean | undefined | null>,
+    }),
+
+  adminSetUserDisabled: (id: string, disabled: boolean): Promise<{ id: string; disabled: boolean }> =>
+    request<{ id: string; disabled: boolean }>(`/api/v1/admin/users/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ disabled }),
+    }),
+
+  adminActivity: (params: ActivityQuery): Promise<PaginatedResponse<ActivityItem>> =>
+    request<PaginatedResponse<ActivityItem>>('/api/v1/admin/activity', {
+      method: 'GET',
+      params: params as Record<string, string | number | boolean | undefined | null>,
+    }),
+
+  adminReviews: (params: { page?: number; limit?: number }): Promise<PaginatedResponse<AdminReview>> =>
+    request<PaginatedResponse<AdminReview>>('/api/v1/admin/reviews', {
+      method: 'GET',
+      params: params as Record<string, string | number | boolean | undefined | null>,
+    }),
+
+  adminDeleteReview: (id: string): Promise<void> =>
+    request<void>(`/api/v1/admin/reviews/${id}`, { method: 'DELETE' }),
 
   // Statistics
   getStatistics: (): Promise<Statistics> =>

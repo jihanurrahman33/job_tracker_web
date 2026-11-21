@@ -45,8 +45,91 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  role: 'user' | 'admin';
+  disabled?: boolean;
   created_at: string;
   updated_at: string;
+}
+
+// Admin
+export interface DayCount {
+  day: string;
+  count: number;
+}
+
+export interface ActivityItem {
+  id: number;
+  created_at: string;
+  action: string;
+  method: string;
+  path: string;
+  status: number;
+  duration_ms: number;
+  ip: string;
+  user_agent: string;
+  request_id: string;
+  user_id: string;
+  user_email: string;
+  user_name: string;
+}
+
+export interface AdminOverview {
+  totals: {
+    users: number;
+    applications: number;
+    interviews: number;
+    reminders: number;
+    reviews: number;
+    average_rating: number;
+  };
+  users: {
+    new_7d: number;
+    new_30d: number;
+    disabled: number;
+    active_24h: number;
+    active_7d: number;
+  };
+  last_24h: {
+    events: number;
+    logins: number;
+    failed_logins: number;
+    blocked: number;
+    client_errors: number;
+    server_errors: number;
+  };
+  signups_by_day: DayCount[];
+  events_by_day: DayCount[];
+  applications_by_status: Record<string, number>;
+  recent_events: ActivityItem[];
+}
+
+export interface AdminUser {
+  id: string;
+  name: string;
+  email: string;
+  role: 'user' | 'admin';
+  disabled: boolean;
+  applications: number;
+  last_login_at: string | null;
+  created_at: string;
+}
+
+export interface AdminReview {
+  id: string;
+  author: string;
+  email: string;
+  rating: number;
+  comment: string;
+  created_at: string;
+}
+
+export interface ActivityQuery {
+  action?: string;
+  user_id?: string;
+  ip?: string;
+  min_status?: number;
+  page?: number;
+  limit?: number;
 }
 
 export interface Application {

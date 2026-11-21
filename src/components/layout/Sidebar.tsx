@@ -10,6 +10,7 @@ import {
   Bell,
   BarChart3,
   Settings,
+  ShieldCheck,
   LogOut,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
@@ -61,6 +62,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       icon: Settings,
       active: pathname.startsWith("/settings"),
     },
+    // Only shown to admins. The API checks the role on every admin request.
+    ...(user?.role === "admin"
+      ? [
+          {
+            name: "Admin",
+            href: "/admin",
+            icon: ShieldCheck,
+            active: pathname.startsWith("/admin"),
+          },
+        ]
+      : []),
   ];
 
   return (
