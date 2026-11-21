@@ -10,9 +10,12 @@ import {
   ListApplicationsQuery,
   ListResponse,
   LoginRequest,
+  MyReview,
   PaginatedResponse,
   RegisterRequest,
   Reminder,
+  ReviewsResponse,
+  SaveReviewRequest,
   Statistics,
   UpdateApplicationRequest,
   UpdateInterviewRequest,
@@ -289,6 +292,22 @@ export const api = {
     request<void>(`/api/v1/reminders/${id}`, {
       method: 'DELETE',
     }),
+
+  // Reviews: the list is public, the rest need a signed-in user
+  getReviews: (): Promise<ReviewsResponse> =>
+    request<ReviewsResponse>('/api/v1/reviews', { method: 'GET' }),
+
+  getMyReview: (): Promise<{ data: MyReview | null }> =>
+    request<{ data: MyReview | null }>('/api/v1/reviews/me', { method: 'GET' }),
+
+  saveMyReview: (payload: SaveReviewRequest): Promise<MyReview> =>
+    request<MyReview>('/api/v1/reviews/me', {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    }),
+
+  deleteMyReview: (): Promise<void> =>
+    request<void>('/api/v1/reviews/me', { method: 'DELETE' }),
 
   // Statistics
   getStatistics: (): Promise<Statistics> =>

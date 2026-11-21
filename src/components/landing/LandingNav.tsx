@@ -4,6 +4,12 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { Wordmark } from "./Wordmark";
 
+const LINKS = [
+  { href: "#how-it-helps", label: "How it helps" },
+  { href: "#features", label: "Features" },
+  { href: "#reviews", label: "Reviews" },
+];
+
 export function LandingNav() {
   const { isAuthenticated, isLoading } = useAuth();
 
@@ -12,19 +18,16 @@ export function LandingNav() {
       <Link href="/" className="text-ink" aria-label="JobTracker home">
         <Wordmark />
       </Link>
-      <nav className="flex items-center gap-1 text-[15px] sm:gap-3">
-        <a
-          href="#what-it-keeps"
-          className="hidden rounded px-3 py-2 text-pencil hover:text-ink sm:inline"
-        >
-          What it keeps
-        </a>
-        <a
-          href="#numbers"
-          className="hidden rounded px-3 py-2 text-pencil hover:text-ink sm:inline"
-        >
-          Your numbers
-        </a>
+      <nav className="flex items-center gap-1 text-[15px] sm:gap-2">
+        {LINKS.map((l) => (
+          <a
+            key={l.href}
+            href={l.href}
+            className="hidden rounded px-3 py-2 text-pencil hover:text-ink md:inline"
+          >
+            {l.label}
+          </a>
+        ))}
         {isLoading ? null : isAuthenticated ? (
           <Link
             href="/dashboard"

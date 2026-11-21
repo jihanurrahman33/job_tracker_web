@@ -19,9 +19,9 @@ const display = Young_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "JobTracker: keep every application where you can see it",
+  title: "JobTracker: track every job application",
   description:
-    "Track job applications, interview times and follow-ups in one list, and see where your search is stalling.",
+    "A web app for people applying for jobs. Track applications by stage, schedule interviews, set follow-up reminders and see your reply, interview and offer rates.",
 };
 
 export default function RootLayout({

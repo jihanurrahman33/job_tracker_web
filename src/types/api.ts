@@ -111,6 +111,38 @@ export interface Statistics {
   offer_rate: number;
 }
 
+export interface PublicReview {
+  id: string;
+  author: string;
+  rating: number;
+  comment: string;
+  created_at: string;
+}
+
+export interface ReviewSummary {
+  average: number;
+  count: number;
+  distribution: Record<string, number>;
+}
+
+export interface ReviewsResponse {
+  summary: ReviewSummary;
+  data: PublicReview[];
+}
+
+export interface MyReview {
+  id: string;
+  rating: number;
+  comment: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface SaveReviewRequest {
+  rating: number;
+  comment?: string;
+}
+
 export interface Pagination {
   page: number;
   limit: number;

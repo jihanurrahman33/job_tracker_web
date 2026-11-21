@@ -25,6 +25,7 @@ import { ApplicationDetailModal } from "@/components/applications/ApplicationDet
 import { InterviewFormModal } from "@/components/interviews/InterviewFormModal";
 import { ReminderFormModal } from "@/components/reminders/ReminderFormModal";
 import { ConfirmDialog } from "@/components/common/ConfirmDialog";
+import { ReviewPrompt } from "@/components/reviews/ReviewPrompt";
 
 const ACTIVE_FOR_INTERVIEWS: ApplicationStatus[] = [
   "SCREENING",
@@ -409,6 +410,12 @@ export default function DashboardPage() {
                 onChangeStatus={handleChangeStatus}
               />
             </section>
+          </div>
+        )}
+
+        {!isLoading && !loadFailed && (
+          <div className="mt-14">
+            <ReviewPrompt />
           </div>
         )}
       </div>
