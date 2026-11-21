@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { useServer } from '@/context/ServerContext';
@@ -23,6 +23,14 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
+
+  // The landing page links here with ?demo=1 to prefill the demo account.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('demo') === '1') {
+      setEmail('john@example.com');
+      setPassword('password123');
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

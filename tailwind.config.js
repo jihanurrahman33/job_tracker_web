@@ -8,21 +8,48 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Georgia", "serif"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // Logbook palette
+        paper: "#F2F4F3",
+        ink: "#12263A",
+        pencil: "#5C6B79",
+        rule: "#D5DBE0",
+        marker: "#FFD84A",
+        stamp: "#C8372D",
+        offer: "#1E7A57",
+        // Existing screens use `indigo-*`; remap it to ink blue so the whole
+        // app follows the same palette.
+        indigo: {
+          50: "#EEF3F8",
+          100: "#DCE6F0",
+          200: "#BDD0E3",
+          300: "#8FAECB",
+          400: "#5E86AD",
+          500: "#3C6591",
+          600: "#2A4E75",
+          700: "#1F3D5E",
+          800: "#172F49",
+          900: "#12263A",
+          950: "#0B1826",
+        },
         primary: {
-          50: "#eef2ff",
-          100: "#e0e7ff",
-          200: "#c7d2fe",
-          300: "#a5b4fc",
-          400: "#818cf8",
-          500: "#6366f1",
-          600: "#4f46e5",
-          700: "#4338ca",
-          800: "#3730a3",
-          900: "#312e81",
-          950: "#1e1b4b",
+          50: "#EEF3F8",
+          100: "#DCE6F0",
+          200: "#BDD0E3",
+          300: "#8FAECB",
+          400: "#5E86AD",
+          500: "#3C6591",
+          600: "#2A4E75",
+          700: "#1F3D5E",
+          800: "#172F49",
+          900: "#12263A",
+          950: "#0B1826",
         },
         card: {
           light: "#ffffff",
@@ -30,8 +57,8 @@ module.exports = {
         },
       },
       boxShadow: {
-        glow: "0 0 25px -5px rgba(99, 102, 241, 0.25)",
-        "glow-sm": "0 0 15px -3px rgba(99, 102, 241, 0.15)",
+        glow: "0 0 25px -5px rgba(42, 78, 117, 0.25)",
+        "glow-sm": "0 0 15px -3px rgba(42, 78, 117, 0.15)",
       },
       animation: {
         "fade-in": "fadeIn 0.2s ease-in-out",

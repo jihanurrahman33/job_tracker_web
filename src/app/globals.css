@@ -3,26 +3,67 @@
 @tailwind utilities;
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #09090b;
-    --foreground: #f4f4f5;
-  }
+  --background: #f2f4f3;
+  --foreground: #12263a;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Sleek Scrollbar */
+:focus-visible {
+  outline: 2px solid #12263a;
+  outline-offset: 2px;
+}
+
+/* Faint ruled lines, like a logbook page */
+.ledger {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 31px,
+    rgba(18, 38, 58, 0.06) 31px,
+    rgba(18, 38, 58, 0.06) 32px
+  );
+}
+
+/* Rubber stamp landing on a row. Runs only when a person clicks. */
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: scale(2) rotate(-14deg);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(0.94) rotate(-6deg);
+  }
+  100% {
+    opacity: 0.92;
+    transform: scale(1) rotate(-6deg);
+  }
+}
+
+.stamp-in {
+  animation: stamp-in 0.28s cubic-bezier(0.3, 0.9, 0.4, 1) both;
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-in {
+    animation: none;
+    opacity: 0.92;
+    transform: rotate(-6deg);
+  }
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -33,19 +74,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.4);
+  background: rgba(92, 107, 121, 0.4);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.7);
+  background: rgba(92, 107, 121, 0.7);
 }
-
-.dark ::-webkit-scrollbar-thumb {
-  background: rgba(63, 63, 70, 0.5);
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(63, 63, 70, 0.8);
-}
-
