@@ -13,7 +13,6 @@ import {
   LogOut,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
-import { useServer } from "@/context/ServerContext";
 import { Wordmark } from "@/components/landing/Wordmark";
 
 interface SidebarProps {
@@ -24,7 +23,6 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const pathname = usePathname();
   const { user, logout } = useAuth();
-  const { isOnline, isChecking } = useServer();
 
   const navItems = [
     {
@@ -64,12 +62,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       active: pathname.startsWith("/settings"),
     },
   ];
-
-  const serverLabel = isChecking
-    ? "Checking server"
-    : isOnline
-      ? "Server connected"
-      : "Server unreachable";
 
   return (
     <>
@@ -117,22 +109,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         </nav>
 
         <div className="space-y-4 border-t border-paper/10 p-4">
-          <Link
-            href="/settings"
-            className="flex items-center gap-2 rounded px-1 text-sm text-paper/70 hover:text-white"
-          >
-            <span
-              className={`h-2 w-2 rounded-full ${
-                isChecking
-                  ? "bg-marker"
-                  : isOnline
-                    ? "bg-emerald-400"
-                    : "bg-red-400"
-              }`}
-            />
-            {serverLabel}
-          </Link>
-
           {user && (
             <div className="flex items-center justify-between gap-2">
               <div className="min-w-0">

@@ -14,7 +14,6 @@ import {
   Award,
   Calendar,
   Briefcase,
-  Target,
   Zap,
   Lightbulb,
   CheckCircle2,
@@ -44,73 +43,9 @@ export default function AnalyticsPage() {
     fetchStats();
   }, [fetchStats]);
 
-  const total = stats?.total_applications || 0;
-  const byStatus = stats?.by_status || {};
-
-  // Funnel steps calculation
-  const appliedCount = total;
-  const screeningCount =
-    (byStatus["SCREENING"] || 0) +
-    (byStatus["INTERVIEW"] || 0) +
-    (byStatus["TECHNICAL_INTERVIEW"] || 0) +
-    (byStatus["OFFER"] || 0) +
-    (byStatus["ACCEPTED"] || 0);
-  const interviewCount =
-    (byStatus["INTERVIEW"] || 0) +
-    (byStatus["TECHNICAL_INTERVIEW"] || 0) +
-    (byStatus["OFFER"] || 0) +
-    (byStatus["ACCEPTED"] || 0);
-  const offerCount = (byStatus["OFFER"] || 0) + (byStatus["ACCEPTED"] || 0);
-  const acceptedCount = byStatus["ACCEPTED"] || 0;
-
-  const funnelSteps = [
-    {
-      label: "1. Applications Submitted",
-      count: appliedCount,
-      percent: 100,
-      color: "from-blue-600 to-indigo-600",
-      description: "Total jobs applied to",
-    },
-    {
-      label: "2. Recruiter Responses",
-      count: screeningCount,
-      percent:
-        appliedCount > 0
-          ? Math.round((screeningCount / appliedCount) * 100)
-          : 0,
-      color: "from-indigo-600 to-purple-600",
-      description: "Applications moving past initial review",
-    },
-    {
-      label: "3. Interview Rounds",
-      count: interviewCount,
-      percent:
-        appliedCount > 0
-          ? Math.round((interviewCount / appliedCount) * 100)
-          : 0,
-      color: "from-purple-600 to-pink-600",
-      description: "Technical, HR, and System Design screens",
-    },
-    {
-      label: "4. Job Offers Extended",
-      count: offerCount,
-      percent:
-        appliedCount > 0 ? Math.round((offerCount / appliedCount) * 100) : 0,
-      color: "from-pink-600 to-emerald-600",
-      description: "Offers received from employers",
-    },
-    {
-      label: "5. Accepted Offer",
-      count: acceptedCount,
-      percent:
-        appliedCount > 0 ? Math.round((acceptedCount / appliedCount) * 100) : 0,
-      color: "from-emerald-600 to-teal-500",
-      description: "Final accepted position",
-    },
-  ];
 
   return (
-    <AppLayout title="Analytics & Funnel Insights" onRefreshData={fetchStats}>
+    <AppLayout title="Analytics" onRefreshData={fetchStats}>
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
@@ -118,7 +53,7 @@ export default function AnalyticsPage() {
             Job Search Analytics
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-zinc-400 mt-0.5">
-            Aggregated conversion rates and pipeline funnel optimization
+            How far your applications get, and where they stop
           </p>
         </div>
       </div>
@@ -165,55 +100,6 @@ export default function AnalyticsPage() {
               icon={Award}
               color="emerald"
             />
-          </div>
-
-          {/* Funnel Visualizer */}
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-zinc-800 shadow-xs">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-zinc-100 flex items-center gap-2">
-                  <Target className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-                  <span>Application Conversion Funnel</span>
-                </h3>
-                <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">
-                  Trace where your applications advance and calculate
-                  step-by-step conversion efficiency
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              {funnelSteps.map((step, idx) => (
-                <div key={idx} className="space-y-1.5">
-                  <div className="flex items-center justify-between text-xs">
-                    <div>
-                      <span className="font-bold text-slate-800 dark:text-zinc-200">
-                        {step.label}
-                      </span>
-                      <span className="text-slate-400 ml-2 hidden sm:inline">
-                        — {step.description}
-                      </span>
-                    </div>
-                    <div className="text-right">
-                      <span className="font-extrabold text-slate-900 dark:text-zinc-100">
-                        {step.count}
-                      </span>
-                      <span className="text-[11px] font-semibold text-slate-400 ml-1.5">
-                        ({step.percent}%)
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Funnel Progress Bar */}
-                  <div className="w-full bg-slate-100 dark:bg-zinc-800 h-3 rounded-full overflow-hidden shadow-inner">
-                    <div
-                      className={`h-full rounded-full bg-gradient-to-r ${step.color} transition-all duration-700`}
-                      style={{ width: `${Math.max(4, step.percent)}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Status Distribution */}

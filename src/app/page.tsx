@@ -54,10 +54,10 @@ export default function LandingPage() {
                 Create an account
               </Link>
               <Link
-                href="/login?demo=1"
+                href="/login"
                 className="text-base font-medium underline decoration-ink/30 underline-offset-4 hover:decoration-ink"
               >
-                Look around with the demo account
+                Sign in
               </Link>
             </div>
           </div>
